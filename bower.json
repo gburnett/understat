@@ -1,0 +1,28 @@
+{
+  "name": "understat",
+  "version": "0.0.1",
+  "authors": [
+    "gburnett <garyburnett3000@gmail.com>"
+  ],
+  "description": "Simple statistical extension to underscore",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "statistics"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jasmine": "~2.0.0",
+    "underscore": "~1.6.0"
+  }
+}
