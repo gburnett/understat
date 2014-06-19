@@ -2,7 +2,7 @@
   "name": "understat",
   "version": "0.0.1",
   "authors": [
-    "gburnett <garyburnett3000@gmail.com>"
+    "gburnett"
   ],
   "description": "Simple statistical extension to underscore",
   "moduleType": [
