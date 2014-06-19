@@ -1,4 +1,4 @@
-describe("Clegg", function(){
+describe("understat", function(){
     it("sum an array of numbers", function(){
 	expect(_.sum([])).toEqual(0);
 	expect(_.sum([1, 2, 3])).toEqual(6);
