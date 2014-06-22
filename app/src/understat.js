@@ -1,4 +1,6 @@
 (function(root){
+    
+    'use strict';
 
     var _ = root._ || require('underscore');
 
@@ -13,9 +15,11 @@
             return Math.round(number * 1000)/1000;
         },
         median: function (numbers){
-            if (numbers.length === 0) return null;
+            if (numbers.length === 0) {
+		return null;
+	    }
             var n = numbers.length/2;
-            if((numbers.length % 2) == 0){
+            if((numbers.length % 2) === 0){
                 return _.chain(numbers)
                     .sortBy(function(number) { return number; })
                     .slice(n - 1, n + 1)

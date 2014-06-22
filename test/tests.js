@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 describe("understat", function(){
     it("sum an array of numbers", function(){
 	expect(_.sum([])).toEqual(0);
