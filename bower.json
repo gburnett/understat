@@ -22,7 +22,6 @@
     "tests"
   ],
   "dependencies": {
-    "jasmine": "~2.0.0",
     "underscore": "~1.6.0"
   }
 }

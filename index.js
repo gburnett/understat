@@ -1,3 +1,3 @@
-require('./app/src/understat.js');
+require('./app/understat.js');
 
 module.exports = require('underscore');

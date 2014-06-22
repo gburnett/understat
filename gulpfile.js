@@ -5,14 +5,14 @@ var gulp = require('gulp'),
     jasmine = require('gulp-jasmine');
 
 gulp.task('compress', function() {
-    gulp.src('app/src/*.js')
+    gulp.src('app/*.js')
 	.pipe(uglify())
 	.pipe(rename('understat.min.js'))
 	.pipe(gulp.dest('dist'));
 });
 
 gulp.task('lint', function() {
-    gulp.src('app/src/*.js')
+    gulp.src('app/*.js')
 	.pipe(jshint())
 	.pipe(jshint.reporter('default'));
 });
