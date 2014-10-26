@@ -9,10 +9,18 @@ describe("understat", function(){
 	expect(_.sum([])).toEqual(0);
     });
 
-    it("round to three decimal places", function(){
-	expect(_.round(1.1111222)).toEqual(1.111);
-	expect(_.round(1.111555)).toEqual(1.112);
-	expect(_.round(1.110)).toEqual(1.11);
+    it("round to a given number of decimal places", function(){
+	expect(_.round(1.1111222)).toEqual(1.1);
+	expect(_.round(1.111555)).toEqual(1.1);
+	expect(_.round(1.110)).toEqual(1.1);
+	expect(_.round(1.1111222, 3)).toEqual(1.111);
+	expect(_.round(1.111555, 3)).toEqual(1.112);
+	expect(_.round(1.110, 3)).toEqual(1.11);
+	expect(_.round(1.1111222, 4)).toEqual(1.1111);
+	expect(_.round(1.111555, 4)).toEqual(1.1116);
+	expect(_.round(1.110, 4)).toEqual(1.11);
+	expect(function () { _.round(1.1111222, 0); }).toThrow(new Error('The number of decimal places should be one or more'));
+	expect(function () { _.round(1.1111222, -1); }).toThrow(new Error('The number of decimal places should be one or more'));
     });
 
     it("calculate the mean", function(){
@@ -37,12 +45,12 @@ describe("understat", function(){
     it("calculate the sample standard deviation", function(){
 	expect(_.chain([18, 20, 22, 24, 26])
 	       .sampleStandardDeviation()
-	       .round()
+	       .round(3)
 	       .value())
 	    .toEqual(3.162);
 	expect(_.chain([2, 4, 4, 4, 5, 5, 7, 9])
 	       .sampleStandardDeviation()
-	       .round()
+	       .round(3)
 	       .value())
 	    .toEqual(2.138);
     });
@@ -50,13 +58,13 @@ describe("understat", function(){
     it("calculate the standard deviation", function(){
 	expect(_.chain([18, 20, 22, 24, 26])
 	       .standardDeviation()
-	       .round()
+	       .round(3)
 	       .value())
 	    .toEqual(2.828);
 	expect(_.standardDeviation([2, 4, 4, 4, 5, 5, 7, 9])).toEqual(2);
 	expect(_.chain([1, 2, 3])
 	       .standardDeviation()
-	       .round()
+	       .round(3)
 	       .value())
 	    .toEqual(0.816);
     });

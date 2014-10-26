@@ -11,8 +11,12 @@
         mean: function (numbers){
             return (numbers.length === 0) ? null : ((_.sum(numbers))/numbers.length) ;
         },
-        round: function (number) {
-            return Math.round(number * 1000)/1000;
+        round: function (number, places) {
+	    if (places < 1) {
+		throw new Error('The number of decimal places should be one or more');
+	    }
+	    var modifier = Math.pow(10, places || 1);
+            return Math.round(number * modifier)/modifier;
         },
         median: function (numbers){
             if (numbers.length === 0) {

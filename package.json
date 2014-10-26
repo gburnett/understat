@@ -1,6 +1,6 @@
 {
   "name": "understat",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Simple statistical extension to underscore",
   "main": "index.js",
   "dependencies": {
