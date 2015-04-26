@@ -1,14 +1,20 @@
 var gulp = require('gulp'),
-    uglify = require('gulp-uglify'),
     jshint = require('gulp-jshint'),
     rename = require('gulp-rename'),
-    jasmine = require('gulp-jasmine');
+    jasmine = require('gulp-jasmine'),
+    babel = require('gulp-babel'),
+    rimraf = require('gulp-rimraf');
 
-gulp.task('compress', function() {
+gulp.task('rimraf', function () {
+    gulp.src('./node/*.js')
+        .pipe(rimraf({ read: false }));
+});
+
+gulp.task('build', function() {
     gulp.src('app/*.js')
-	.pipe(uglify())
-	.pipe(rename('understat.min.js'))
-	.pipe(gulp.dest('dist'));
+	.pipe(babel())
+	.pipe(rename('understat.js'))
+	.pipe(gulp.dest('node'));
 });
 
 gulp.task('lint', function() {
@@ -20,4 +26,13 @@ gulp.task('lint', function() {
 gulp.task('test', function() {
     gulp.src(['./index.js','./test/tests.js'])
 	.pipe(jasmine());
+});
+
+gulp.task('prepublish', ['rimraf', 'lint', 'build', 'test']);
+
+gulp.task('watch', function () {
+    var watch = require('gulp-watch');
+    watch(['./index.js', './app/*.js'], function () {
+        gulp.start('prepublish');
+    });
 });
