@@ -72,3 +72,5 @@ _.mixin({
         return _.mean(range);
     }
 });
+
+module.exports = _;
