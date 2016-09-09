@@ -23,12 +23,7 @@ gulp.task('lint', function() {
 	.pipe(jshint.reporter('default'));
 });
 
-gulp.task('test', function() {
-    gulp.src(['./index.js','./test/tests.js'])
-	.pipe(jasmine());
-});
-
-gulp.task('prepublish', ['rimraf', 'lint', 'build', 'test']);
+gulp.task('prepublish', ['rimraf', 'lint', 'build']);
 
 gulp.task('watch', function () {
     var watch = require('gulp-watch');

@@ -14,7 +14,7 @@ _.mixin({
         return numbers.length === 0 ? null : _.sum(numbers) / numbers.length;
     },
     round: function round(number) {
-        var places = arguments[1] === undefined ? 1 : arguments[1];
+        var places = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
 
         if (places < 1) {
             throw new Error('The number of decimal places should be one or more');

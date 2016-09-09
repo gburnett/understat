@@ -1,77 +1,81 @@
-var _ = require('underscore');
+var test = require('tape');
+var _ = require('../index.js');
 
-describe("understat", function(){
-    it("sum an array of numbers", function(){
-	expect(_.sum([])).toEqual(0);
-	expect(_.sum([1, 2, 3])).toEqual(6);
-	expect(_.sum([1, -2, 3])).toEqual(2);
-	expect(_.sum([1, 0, -3])).toEqual(-2);
-	expect(_.sum([])).toEqual(0);
-    });
+test("sum an array of numbers", function(t){
+    t.plan(5);
+    t.equal(_.sum([]), 0);
+    t.equal(_.sum([1, 2, 3]), 6);
+    t.equal(_.sum([1, -2, 3]), 2);
+    t.equal(_.sum([1, 0, -3]), -2);
+    t.equal(_.sum([]), 0);
+});
 
-    it("round to a given number of decimal places", function(){
-	expect(_.round(1.1111222)).toEqual(1.1);
-	expect(_.round(1.111555)).toEqual(1.1);
-	expect(_.round(1.110)).toEqual(1.1);
-	expect(_.round(1.1111222, 3)).toEqual(1.111);
-	expect(_.round(1.111555, 3)).toEqual(1.112);
-	expect(_.round(1.110, 3)).toEqual(1.11);
-	expect(_.round(1.1111222, 4)).toEqual(1.1111);
-	expect(_.round(1.111555, 4)).toEqual(1.1116);
-	expect(_.round(1.110, 4)).toEqual(1.11);
-	expect(function () { _.round(1.1111222, 0); }).toThrow(new Error('The number of decimal places should be one or more'));
-	expect(function () { _.round(1.1111222, -1); }).toThrow(new Error('The number of decimal places should be one or more'));
-    });
+test("round to a given number of decimal places", function(t){
+    t.plan(11);
+    t.equal(_.round(1.1111222), 1.1);
+    t.equal(_.round(1.111555), 1.1);
+    t.equal(_.round(1.110), 1.1);
+    t.equal(_.round(1.1111222, 3), 1.111);
+    t.equal(_.round(1.111555, 3), 1.112);
+    t.equal(_.round(1.110, 3), 1.11);
+    t.equal(_.round(1.1111222, 4), 1.1111);
+    t.equal(_.round(1.111555, 4), 1.1116);
+    t.equal(_.round(1.110, 4), 1.11);
+    t.throws(function () { _.round(1.1111222, 0); }, new Error('The number of decimal places should be one or more'));
+    t.throws(function () { _.round(1.1111222, -1); }, new Error('The number of decimal places should be one or more'));
+});
 
-    it("calculate the mean", function(){
-	expect(_.mean([5, 26, 13, 12, 19, 21])).toEqual(16);
-	expect(_.mean([1, 2, 3])).toEqual(2);
-	expect(_.mean([1, 2, 3, 4])).toEqual(2.5);
-	expect(_.mean([])).toEqual(null);
-    });
+test("calculate the mean", function(t){
+    t.plan(4);
+    t.equal(_.mean([5, 26, 13, 12, 19, 21]), 16);
+    t.equal(_.mean([1, 2, 3]), 2);
+    t.equal(_.mean([1, 2, 3, 4]), 2.5);
+    t.equal(_.mean([]), null);
+});
 
-    it("calculate the median", function(){
-	expect(_.median([13, 21, 12, 4, 26, 19])).toEqual(16);
-	expect(_.median([1, 2, 3])).toEqual(2);
-	expect(_.median([1, 2, 3, 4])).toEqual(2.5);
-	expect(_.median([])).toEqual(null);
-    });
+test("calculate the median", function(t){
+    t.plan(4);
+    t.equal(_.median([13, 21, 12, 4, 26, 19]), 16);
+    t.equal(_.median([1, 2, 3]), 2);
+    t.equal(_.median([1, 2, 3, 4]), 2.5);
+    t.equal(_.median([]), null);
+});
 
-    it("calculate the mean deviation", function(){
-	expect(_.meanDeviation([5, 26, 13, 12, 19, 21])).toEqual(6);
-	expect(_.meanDeviation([3, 6, 6, 7, 8, 11, 15, 16])).toEqual(3.75);
-    });
+test("calculate the mean deviation", function(t){
+    t.plan(2);
+    t.equal(_.meanDeviation([5, 26, 13, 12, 19, 21]), 6);
+    t.equal(_.meanDeviation([3, 6, 6, 7, 8, 11, 15, 16]), 3.75);
+});
 
-    it("calculate the sample standard deviation", function(){
-	expect(_.chain([18, 20, 22, 24, 26])
-	       .sampleStandardDeviation()
-	       .round(3)
-	       .value())
-	    .toEqual(3.162);
-	expect(_.chain([2, 4, 4, 4, 5, 5, 7, 9])
-	       .sampleStandardDeviation()
-	       .round(3)
-	       .value())
-	    .toEqual(2.138);
-    });
+test("calculate the sample standard deviation", function(t){
+    t.plan(2);
+    t.equal(_.chain([18, 20, 22, 24, 26])
+            .sampleStandardDeviation()
+            .round(3)
+            .value(), 3.162);
+    t.equal(_.chain([2, 4, 4, 4, 5, 5, 7, 9])
+            .sampleStandardDeviation()
+            .round(3)
+            .value(), 2.138);
+});
 
-    it("calculate the standard deviation", function(){
-	expect(_.chain([18, 20, 22, 24, 26])
-	       .standardDeviation()
-	       .round(3)
-	       .value())
-	    .toEqual(2.828);
-	expect(_.standardDeviation([2, 4, 4, 4, 5, 5, 7, 9])).toEqual(2);
-	expect(_.chain([1, 2, 3])
-	       .standardDeviation()
-	       .round(3)
-	       .value())
-	    .toEqual(0.816);
-    });
+test("calculate the standard deviation", function(t){
+    t.plan(3);
+    t.equal(_.chain([18, 20, 22, 24, 26])
+            .standardDeviation()
+            .round(3)
+            .value(), 2.828);
+    t.equal(_.standardDeviation([2, 4, 4, 4, 5, 5, 7, 9]), 2);
+    t.equal(_.chain([1, 2, 3])
+            .standardDeviation()
+            .round(3)
+            .value(), 0.816);
+});
 
-    it("rank a number in an array of numbers", function(){
-	expect(_.rank([10, 15, 13, 22, 21, 9, 22, 14, 8, 14, 12, 17, 22, 22, 9, 14], 9)).toEqual(2.5);
-	expect(_.rank([10, 15, 13, 22, 21, 9, 22, 14, 8, 14, 12, 17, 22, 22, 9, 14], 10)).toEqual(4);
-	expect(_.rank([10, 15, 13, 22, 21, 9, 22, 14, 8, 14, 12, 17, 22, 22, 9, 14], 22)).toEqual(14.5);
-    });
+test("rank a number in an array of numbers", function(t){
+    t.plan(3);
+    var numbers = [10, 15, 13, 22, 21, 9, 22, 14, 8, 14, 12, 17, 22, 22, 9, 14];
+    t.equal(_.rank(numbers, 9), 2.5);
+    t.equal(_.rank(numbers, 10), 4);
+    t.equal(_.rank(numbers, 22), 14.5);
 });

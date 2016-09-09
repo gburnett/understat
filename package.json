@@ -9,15 +9,15 @@
   "devDependencies": {
     "gulp": "^3.8.9",
     "gulp-babel": "^5.1.0",
-    "gulp-jasmine": "^2.0.1",
     "gulp-jshint": "^1.8.5",
     "gulp-rename": "^1.2.0",
     "gulp-rimraf": "^0.1.1",
-    "gulp-watch": "^4.2.4"
+    "gulp-watch": "^4.2.4",
+    "tape": "^4.6.0"
   },
   "scripts": {
-    "test": "gulp test",
-    "prepublish": "gulp prepublish"
+    "test": "node ./test/tests.js",
+    "prepublish": "gulp prepublish && npm test"
   },
   "repository": {
     "type": "git",
