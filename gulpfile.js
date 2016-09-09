@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     rename = require('gulp-rename'),
-    jasmine = require('gulp-jasmine'),
     babel = require('gulp-babel'),
     rimraf = require('gulp-rimraf');
 
